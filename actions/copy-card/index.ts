@@ -2,8 +2,10 @@
 
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
 import { db } from "@/lib/db";
+import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 
 import { CopyCard } from "./schema";
@@ -34,9 +36,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
 
     if (!cardToCopy) {
-      return {
-        error: "Card not found.",
-      };
+      return { error: "Card not found" };
     }
 
     const lastCard = await db.card.findFirst({
@@ -49,11 +49,18 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     card = await db.card.create({
       data: {
-        listId: cardToCopy.listId,
-        title: `${cardToCopy.title} - (copy)`,
+        title: `${cardToCopy.title} - Copy`,
         description: cardToCopy.description,
         order: newOrder,
+        listId: cardToCopy.listId,
       },
+    });
+
+    await createAuditLog({
+      entityTitle: card.title,
+      entityId: card.id,
+      entityType: ENTITY_TYPE.CARD,
+      action: ACTION.CREATE,
     });
   } catch (error) {
     return {
