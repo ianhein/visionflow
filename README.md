@@ -38,10 +38,13 @@ VisionFlow es un clon fullstack de Trello, construido con el objetivo de proporc
 
 Para instalar y ejecutar VisionFlow localmente, sigue estos pasos:
 git clone https://github.com/ianhein/visionflow.git
+
 1. Clona el repositorio:
-  ```
-  git clone https://github.com/ianhein/visionflow.git
-   ```
+
+```
+git clone https://github.com/ianhein/visionflow.git
+```
+
 2. Navega al directorio del proyecto:
 
 ```
@@ -59,3 +62,25 @@ git clone https://github.com/ianhein/visionflow.git
 ```
  npm run dev
 ```
+
+### Uso del CLI de Stripe
+
+El CLI de Stripe está incluido en el repositorio para facilitar la integración y prueba de las funcionalidades de pago. Para usarlo, sigue estos pasos:
+
+1. **Autenticación con Stripe**:
+
+   - Ejecuta el siguiente comando para iniciar sesión:
+     ```
+     stripe login
+     ```
+   - Se generará un enlace en tu terminal. Abre este enlace en tu navegador web para iniciar sesión en tu cuenta de Stripe.
+   - Sigue las instrucciones en la página web para autenticar tu CLI de Stripe.
+
+2. **Uso del CLI**:
+   - Una vez autenticado, puedes usar el CLI de Stripe para ejecutar comandos específicos necesarios para tu proyecto, como probar webhooks o enviar solicitudes API.
+3. **Uso del CLI para Probar Webhooks**:
+   - Una vez autenticado, ejecuta el siguiente comando para escuchar eventos de webhook y redirigirlos a tu aplicación local:
+     ```
+     stripe listen --forward-to localhost:3000/api/webhook
+     ```
+   - Este comando permitirá que recibas eventos de Stripe en tu entorno de desarrollo, lo que es esencial para probar y desarrollar funciones relacionadas con pagos y webhooks.
