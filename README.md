@@ -39,7 +39,7 @@ VisionFlow es un clon fullstack de Trello, construido con el objetivo de proporc
 Para instalar y ejecutar VisionFlow localmente, sigue estos pasos:
 
 1. Clona el repositorio:
-   `git clone https://github.com/tu-usuario/visionflow.git`
+   `git clone https://github.com/ianhein/visionflow.git`
 2. Navega al directorio del proyecto:
 
 ```
