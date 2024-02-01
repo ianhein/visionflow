@@ -11,6 +11,7 @@ import { unsplash } from "@/lib/unsplash";
 import { defaultImages } from "@/constants/images";
 
 import { FormErrors } from "./form-errors";
+import { toast } from "sonner";
 
 interface FormPickerProps {
   id: string;
@@ -36,7 +37,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
           const newImages = result.response as Array<Record<string, any>>;
           setImages(newImages);
         } else {
-          console.error("Failed to get images from Unsplash");
+          toast.error("Failed to fetch images from Unsplash");
         }
       } catch (error) {
         console.log(error);
